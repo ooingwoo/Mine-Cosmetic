@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUUUNI × 토리</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface2: #1c1c1c;
+  --border: #272727;
+  --accent: #e8ff47;
+  --text: #f0f0f0;
+  --text-mid: #777;
+  --text-dim: #333;
+  --white: #ffffff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 배경 노이즈 텍스처 */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; z-index:0; opacity:.4;
+}
+
+/* ── HERO ── */
+.hero {
+  position:relative; z-index:1;
+  padding: 56px 28px 48px;
+  text-align:center;
+  border-bottom: 1px solid var(--border);
+}
+.hero-top {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom: 48px;
+}
+.brand-wordmark {
+  font-family:'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 5px;
+  color: var(--text-mid);
+}
+.collab-tag {
+  font-size:10px; letter-spacing:2px;
+  color: var(--accent);
+  border:1px solid rgba(232,255,71,.3);
+  padding: 5px 12px; border-radius:20px;
+}
+
+/* 프로필 */
+.profile-area { margin-bottom: 32px; }
+.profile-ring {
+  width:96px; height:96px; border-radius:50%;
+  background: linear-gradient(135deg, var(--accent), #a8c000);
+  padding: 2px; margin: 0 auto 16px;
+}
+.profile-inner {
+  width:100%; height:100%; border-radius:50%;
+  background: var(--surface2);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Noto Sans KR', sans-serif;
+  font-size:28px; font-weight:700;
+  color: var(--text);
+}
+.profile-name {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:42px; letter-spacing:4px;
+  color: var(--white);
+  margin-bottom:4px;
+}
+.profile-handle {
+  font-size:12px; color: var(--text-mid);
+  letter-spacing:2px;
+}
+
+/* 구분선 */
+.divider {
+  display:flex; align-items:center; gap:12px;
+  margin: 24px auto; width:fit-content;
+}
+.div-line { width:36px; height:1px; background:var(--border); }
+.div-diamond {
+  width:5px; height:5px;
+  background:var(--accent); transform:rotate(45deg);
+}
+
+/* 유튜브 버튼 */
+.yt-btn {
+  display:inline-flex; align-items:center; gap:10px;
+  background: var(--surface2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:13px 20px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:13px;
+  transition: border-color .2s, background .2s;
+  width:100%; max-width:320px;
+  justify-content:space-between;
+}
+.yt-btn:hover { border-color: #ff4444; background:var(--surface); }
+.yt-btn-left { display:flex; align-items:center; gap:10px; }
+.yt-icon {
+  width:36px; height:36px; border-radius:10px;
+  background:#ff0000;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; flex-shrink:0;
+}
+.yt-label { font-size:10px; color:var(--text-mid); margin-bottom:2px; letter-spacing:1px; }
+.yt-name { font-size:13px; font-weight:500; }
+.yt-arrow { color:var(--text-dim); font-size:16px; }
+
+/* ── 상품 섹션 ── */
+.products {
+  position:relative; z-index:1;
+  padding: 40px 20px;
+}
+.section-eyebrow {
+  font-size:10px; letter-spacing:4px;
+  color:var(--text-mid); text-align:center;
+  margin-bottom:8px;
+}
+.section-title {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:28px; letter-spacing:2px;
+  text-align:center; color:var(--white);
+  margin-bottom:6px;
+}
+.section-sub {
+  font-size:12px; color:var(--text-mid);
+  text-align:center; margin-bottom:28px;
+  line-height:1.6;
+}
+
+/* 상품 카드 */
+.product-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px 20px;
+  margin-bottom:12px;
+  position:relative;
+  overflow:hidden;
+  transition: border-color .25s, transform .2s;
+  cursor:pointer;
+}
+.product-card:hover { border-color: rgba(232,255,71,.4); transform:translateY(-2px); }
+.product-card.best { border-color: var(--accent); }
+.product-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, var(--border), transparent);
+}
+.product-card.best::before {
+  background:linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.card-top {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  margin-bottom:12px;
+}
+.card-left {}
+.card-qty {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:36px; line-height:1; color:var(--white);
+  margin-bottom:2px;
+}
+.card-name { font-size:12px; color:var(--text-mid); letter-spacing:1px; }
+.card-right { text-align:right; }
+.card-price {
+  font-family:'Bebas Neue', sans-serif;
+  font-size:32px; color:var(--accent);
+  line-height:1;
+}
+.card-unit { font-size:11px; color:var(--text-mid); margin-top:2px; }
+
+.card-divider { height:1px; background:var(--border); margin:12px 0; }
+
+.card-meta {
+  display:flex; justify-content:space-between; align-items:center;
+}
+.card-shipping {
+  font-size:11px; color:var(--text-mid);
+  display:flex; align-items:center; gap:5px;
+}
+.ship-dot {
+  width:5px; height:5px; border-radius:50%;
+}
+.ship-dot.paid { background:#ff6b6b; }
+.ship-dot.free { background:#51cf66; }
+
+.card-badge {
+  font-size:10px; padding:3px 10px;
+  border-radius:10px; font-weight:700;
+  letter-spacing:1px;
+}
+.badge-best { background:var(--accent); color:#000; }
+.badge-popular { background:rgba(232,255,71,.1); color:var(--accent); border:1px solid rgba(232,255,71,.3); }
+
+/* 보너스 태그 */
+.bonus-tag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(232,255,71,.06);
+  border:1px solid rgba(232,255,71,.2);
+  border-radius:10px;
+  padding:8px 12px;
+  font-size:11px;
+  color:var(--accent);
+  margin-top:10px;
+  width:100%;
+}
+.bonus-icon { font-size:14px; }
+
+/* 단가 계산 */
+.unit-price {
+  font-size:11px; color:var(--text-mid);
+  margin-top:4px;
+}
+.unit-price span { color:var(--accent); font-weight:500; }
+
+/* ── 안내 섹션 ── */
+.info-section {
+  position:relative; z-index:1;
+  margin:0 20px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px 20px;
+  margin-bottom:16px;
+}
+.info-title {
+  font-size:11px; letter-spacing:2px;
+  color:var(--text-mid); margin-bottom:14px;
+}
+.info-row {
+  display:flex; gap:10px; align-items:flex-start;
+  margin-bottom:10px; font-size:13px; line-height:1.6;
+}
+.info-row:last-child { margin-bottom:0; }
+.info-icon { font-size:14px; flex-shrink:0; margin-top:1px; }
+.info-text { color:var(--text-mid); }
+.info-text strong { color:var(--text); }
+
+/* ── CTA ── */
+.cta-section {
+  position:relative; z-index:1;
+  padding:0 20px 60px;
+}
+.cta-btn {
+  display:block;
+  background:var(--accent);
+  color:#000;
+  text-align:center;
+  padding:20px;
+  border-radius:16px;
+  font-size:15px; font-weight:700;
+  text-decoration:none;
+  letter-spacing:1px;
+  transition:opacity .2s, transform .2s;
+  box-shadow: 0 8px 32px rgba(232,255,71,.2);
+}
+.cta-btn:hover { opacity:.9; transform:translateY(-2px); }
+
+/* ── 푸터 ── */
+footer {
+  position:relative; z-index:1;
+  text-align:center;
+  padding:20px;
+  font-size:10px; color:var(--text-dim);
+  letter-spacing:2px;
+  border-top:1px solid var(--border);
+}
+
+/* 애니메이션 */
+.fade-up {
+  opacity:0; transform:translateY(20px);
+  animation:fadeUp .6s ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity:1; transform:translateY(0); }
+}
+.d1 { animation-delay:.05s; }
+.d2 { animation-delay:.1s; }
+.d3 { animation-delay:.15s; }
+.d4 { animation-delay:.2s; }
+.d5 { animation-delay:.25s; }
+.d6 { animation-delay:.3s; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-top fade-up">
+    <div class="brand-wordmark">MUUUNI</div>
+    <div class="collab-tag">× 토리</div>
+  </div>
+
+  <div class="profile-area fade-up d1">
+    <div class="profile-ring">
+      <div class="profile-inner">토리</div>
+    </div>
+    <div class="profile-name">토리</div>
+    <div class="profile-handle">토리에스엠알</div>
+  </div>
+
+  <div class="divider fade-up d2">
+    <div class="div-line"></div>
+    <div class="div-diamond"></div>
+    <div class="div-line"></div>
+  </div>
+
+  <a href="https://youtube.com/@torysmr" class="yt-btn fade-up d3">
+    <div class="yt-btn-left">
+      <div class="yt-icon">▶</div>
+      <div>
+        <div class="yt-label">채널</div>
+        <div class="yt-name">유튜브 채널</div>
+      </div>
+    </div>
+    <div class="yt-arrow">→</div>
+  </a>
+</section>
+
+<section class="products">
+  <div class="section-eyebrow fade-up d2">MUUUNI 상품</div>
+  <h2 class="section-title fade-up d3">토리 전용 구성</h2>
+  <p class="section-sub fade-up d3">토리 구독자만을 위한 특별 가격</p>
+
+  <!-- 1개 -->
+  <div class="product-card fade-up d3">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-qty">01개</div>
+        <div class="card-name">단품 구매</div>
+      </div>
+      <div class="card-right">
+        <div class="card-price">9,000</div>
+        <div class="card-unit">원</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-meta">
+      <div class="card-shipping">
+        <div class="ship-dot paid"></div>
+        택배비 별도
+      </div>
+      <div class="card-badge badge-popular">단품</div>
+    </div>
+    <div class="unit-price">개당 <span>9,000원</span></div>
+  </div>
+
+  <!-- 3개 -->
+  <div class="product-card fade-up d4">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-qty">03개</div>
+        <div class="card-name">3개 묶음</div>
+      </div>
+      <div class="card-right">
+        <div class="card-price">25,000</div>
+        <div class="card-unit">원</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-meta">
+      <div class="card-shipping">
+        <div class="ship-dot free"></div>
+        택배비 무료
+      </div>
+      <div class="card-badge badge-popular">묶음</div>
+    </div>
+    <div class="unit-price">개당 <span>8,333원</span> · 1개보다 저렴</div>
+  </div>
+
+  <!-- 5개 BEST -->
+  <div class="product-card best fade-up d5">
+    <div class="card-top">
+      <div class="card-left">
+        <div class="card-qty">05개</div>
+        <div class="card-name">5개 세트</div>
+      </div>
+      <div class="card-right">
+        <div class="card-price">40,000</div>
+        <div class="card-unit">원</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-meta">
+      <div class="card-shipping">
+        <div class="ship-dot free"></div>
+        택배비 무료
+      </div>
+      <div class="card-badge badge-best">BEST</div>
+    </div>
+    <div class="unit-price">개당 <span>8,000원</span> · 가장 저렴</div>
+    <div class="bonus-tag">
+      <span class="bonus-icon">🎨</span>
+      퍼스널컬러 셀프 자가진단 동봉
+    </div>
+  </div>
+</section>
+
+<!-- 안내 -->
+<div class="info-section fade-up d5">
+  <div class="info-title">NOTICE</div>
+  <div class="info-row">
+    <div class="info-icon">📦</div>
+    <div class="info-text"><strong>1개 구매 시</strong> 택배비가 별도로 부과돼요.</div>
+  </div>
+  <div class="info-row">
+    <div class="info-icon">🚚</div>
+    <div class="info-text"><strong>3개·5개 구매 시</strong> 택배비 무료예요.</div>
+  </div>
+  <div class="info-row">
+    <div class="info-icon">🎨</div>
+    <div class="info-text"><strong>5개 세트</strong>에는 퍼스널컬러 셀프 자가진단이 함께 동봉돼요.</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section fade-up d6">
+  <a href="https://muuuni.com" class="cta-btn">
+    지금 구매하러 가기 →
+  </a>
+</div>
+
+<footer>MUUUNI × 토리에스엠알 · Mayne Cosmetic</footer>
+
+</body>
+</html>

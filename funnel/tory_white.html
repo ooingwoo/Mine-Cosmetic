@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUUUNI × 토리</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f5;
+  --cream: #f2ede6;
+  --surface: #ffffff;
+  --border: #e8e2d9;
+  --border2: #d4cec5;
+  --accent: #1a1a1a;
+  --accent2: #8b6914;
+  --text: #1a1a1a;
+  --text-mid: #888;
+  --text-light: #bbb;
+  --red-soft: #fff0ee;
+  --green-soft: #eef7f0;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'Noto Sans KR', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  background:var(--surface);
+  padding:52px 28px 44px;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+/* 상단 장식선 */
+.hero::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, transparent, var(--accent2), transparent);
+}
+
+.hero-top {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:44px;
+}
+.brand-wordmark {
+  font-family:'Cormorant Garamond', serif;
+  font-size:18px; letter-spacing:6px; font-weight:400;
+  color:var(--text-mid);
+}
+.collab-tag {
+  font-size:10px; letter-spacing:2px;
+  color:var(--accent2);
+  border:1px solid rgba(139,105,20,.3);
+  padding:5px 12px; border-radius:20px;
+}
+
+/* 프로필 */
+.profile-area { margin-bottom:28px; }
+.profile-ring {
+  width:92px; height:92px; border-radius:50%;
+  background:linear-gradient(135deg, #c9a96e, #8b6914);
+  padding:1.5px; margin:0 auto 14px;
+}
+.profile-inner {
+  width:100%; height:100%; border-radius:50%;
+  background:var(--cream);
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px; font-weight:700;
+  color:var(--text);
+  font-family:'Cormorant Garamond', serif;
+}
+.profile-name {
+  font-family:'Cormorant Garamond', serif;
+  font-size:38px; font-weight:400; letter-spacing:6px;
+  color:var(--text); margin-bottom:4px;
+}
+.profile-handle {
+  font-size:11px; color:var(--text-mid);
+  letter-spacing:2px;
+}
+
+/* 장식 */
+.ornament {
+  display:flex; align-items:center; gap:10px;
+  margin:20px auto 24px; width:fit-content;
+}
+.orn-line { width:32px; height:1px; background:var(--border2); }
+.orn-char { font-size:10px; color:var(--accent2); }
+
+/* 유튜브 버튼 */
+.yt-btn {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:13px 20px;
+  text-decoration:none;
+  color:var(--text);
+  font-size:13px;
+  transition:border-color .2s, background .2s;
+  width:100%; max-width:320px;
+  justify-content:space-between;
+}
+.yt-btn:hover { border-color:var(--border2); background:var(--cream); }
+.yt-btn-left { display:flex; align-items:center; gap:10px; }
+.yt-icon {
+  width:36px; height:36px; border-radius:10px;
+  background:#ff0000;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; flex-shrink:0; color:white;
+}
+.yt-label { font-size:10px; color:var(--text-mid); margin-bottom:2px; letter-spacing:1px; }
+.yt-name { font-size:13px; font-weight:500; }
+.yt-arrow { color:var(--text-light); font-size:16px; }
+
+/* ── 상품 섹션 ── */
+.products {
+  padding:40px 20px;
+  background:var(--bg);
+}
+.section-eyebrow {
+  font-size:10px; letter-spacing:4px;
+  color:var(--text-mid); text-align:center;
+  margin-bottom:6px;
+}
+.section-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:28px; font-weight:400; letter-spacing:3px;
+  text-align:center; color:var(--text);
+  margin-bottom:4px;
+}
+.section-sub {
+  font-size:12px; color:var(--text-mid);
+  text-align:center; margin-bottom:28px;
+  line-height:1.6;
+}
+
+/* 상품 카드 */
+.product-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px 20px;
+  margin-bottom:12px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .2s, box-shadow .2s, transform .2s;
+}
+.product-card:hover {
+  border-color:var(--border2);
+  box-shadow:0 4px 20px rgba(0,0,0,.06);
+  transform:translateY(-1px);
+}
+.product-card.best {
+  border-color:var(--accent2);
+  box-shadow:0 4px 24px rgba(139,105,20,.12);
+}
+.best-ribbon {
+  position:absolute; top:0; right:24px;
+  background:var(--accent2);
+  color:white;
+  font-size:9px; letter-spacing:2px;
+  padding:4px 10px 6px;
+  clip-path:polygon(0 0,100% 0,100% 80%,50% 100%,0 80%);
+  font-weight:700;
+}
+
+.card-top {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  margin-bottom:14px;
+}
+.card-num {
+  font-family:'Cormorant Garamond', serif;
+  font-size:48px; font-weight:300;
+  line-height:1; color:var(--text);
+}
+.card-name {
+  font-size:11px; color:var(--text-mid);
+  letter-spacing:1px; margin-top:2px;
+}
+.card-right { text-align:right; padding-top:4px; }
+.card-price {
+  font-family:'Cormorant Garamond', serif;
+  font-size:34px; font-weight:400;
+  color:var(--text); line-height:1;
+}
+.card-unit { font-size:12px; color:var(--text-mid); }
+
+.card-divider { height:1px; background:var(--border); margin:14px 0; }
+
+.card-meta {
+  display:flex; justify-content:space-between; align-items:center;
+}
+.card-shipping {
+  display:flex; align-items:center; gap:6px;
+  font-size:12px;
+}
+.ship-pill {
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:11px; padding:3px 10px; border-radius:10px; font-weight:500;
+}
+.ship-pill.paid { background:var(--red-soft); color:#d63031; }
+.ship-pill.free { background:var(--green-soft); color:#27ae60; }
+
+.unit-calc {
+  font-size:11px; color:var(--text-mid); margin-top:8px;
+}
+.unit-calc strong { color:var(--accent2); }
+
+/* 보너스 */
+.bonus-box {
+  background:linear-gradient(135deg, #fdf6e3, #faf0d0);
+  border:1px solid rgba(139,105,20,.2);
+  border-radius:12px;
+  padding:11px 14px;
+  margin-top:12px;
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; color:#8b6914;
+}
+.bonus-icon { font-size:16px; }
+
+/* ── 안내 ── */
+.info-section {
+  margin:0 20px 16px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px 20px;
+}
+.info-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:16px; letter-spacing:3px;
+  color:var(--text-mid); margin-bottom:16px;
+  font-style:italic;
+}
+.info-row {
+  display:flex; gap:10px; align-items:flex-start;
+  margin-bottom:12px; font-size:13px; line-height:1.7;
+}
+.info-row:last-child { margin-bottom:0; }
+.info-icon { font-size:14px; flex-shrink:0; margin-top:1px; }
+.info-text { color:var(--text-mid); }
+.info-text strong { color:var(--text); }
+
+/* ── CTA ── */
+.cta-section {
+  padding:4px 20px 60px;
+}
+.cta-btn {
+  display:block;
+  background:var(--accent);
+  color:white;
+  text-align:center;
+  padding:20px;
+  border-radius:16px;
+  font-size:15px; font-weight:500;
+  text-decoration:none;
+  letter-spacing:1px;
+  transition:background .2s, transform .2s;
+}
+.cta-btn:hover { background:#333; transform:translateY(-2px); }
+
+footer {
+  text-align:center;
+  padding:20px;
+  font-size:10px; color:var(--text-light);
+  letter-spacing:2px;
+  border-top:1px solid var(--border);
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic;
+}
+
+.fade-up {
+  opacity:0; transform:translateY(18px);
+  animation:fadeUp .65s ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity:1; transform:translateY(0); }
+}
+.d1{animation-delay:.05s} .d2{animation-delay:.1s}
+.d3{animation-delay:.15s} .d4{animation-delay:.2s}
+.d5{animation-delay:.25s} .d6{animation-delay:.3s}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-top fade-up">
+    <div class="brand-wordmark">MUUUNI</div>
+    <div class="collab-tag">× 토리</div>
+  </div>
+
+  <div class="profile-area fade-up d1">
+    <div class="profile-ring">
+      <div class="profile-inner">토리</div>
+    </div>
+    <div class="profile-name">토리</div>
+    <div class="profile-handle">토리에스엠알</div>
+  </div>
+
+  <div class="ornament fade-up d2">
+    <div class="orn-line"></div>
+    <div class="orn-char">✦</div>
+    <div class="orn-line"></div>
+  </div>
+
+  <a href="https://youtube.com/@torysmr" class="yt-btn fade-up d2">
+    <div class="yt-btn-left">
+      <div class="yt-icon">▶</div>
+      <div>
+        <div class="yt-label">채널</div>
+        <div class="yt-name">유튜브 채널</div>
+      </div>
+    </div>
+    <div class="yt-arrow">→</div>
+  </a>
+</section>
+
+<section class="products">
+  <div class="section-eyebrow fade-up d2">MUUUNI 상품</div>
+  <h2 class="section-title fade-up d2">토리 전용 구성</h2>
+  <p class="section-sub fade-up d3">토리 구독자만을 위한 특별 가격</p>
+
+  <!-- 1개 -->
+  <div class="product-card fade-up d3">
+    <div class="card-top">
+      <div>
+        <div class="card-num">01</div>
+        <div class="card-name">단품 구매</div>
+      </div>
+      <div class="card-right">
+        <div class="card-price">9,000</div>
+        <div class="card-unit">원</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-meta">
+      <span class="ship-pill paid">📦 택배비 별도</span>
+    </div>
+    <div class="unit-calc">개당 <strong>9,000원</strong></div>
+  </div>
+
+  <!-- 3개 -->
+  <div class="product-card fade-up d4">
+    <div class="card-top">
+      <div>
+        <div class="card-num">03</div>
+        <div class="card-name">3개 묶음</div>
+      </div>
+      <div class="card-right">
+        <div class="card-price">25,000</div>
+        <div class="card-unit">원</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-meta">
+      <span class="ship-pill free">🚚 택배비 무료</span>
+    </div>
+    <div class="unit-calc">개당 <strong>8,333원</strong> · 단품보다 절약</div>
+  </div>
+
+  <!-- 5개 BEST -->
+  <div class="product-card best fade-up d5">
+    <div class="best-ribbon">BEST</div>
+    <div class="card-top">
+      <div>
+        <div class="card-num">05</div>
+        <div class="card-name">5개 세트</div>
+      </div>
+      <div class="card-right">
+        <div class="card-price">40,000</div>
+        <div class="card-unit">원</div>
+      </div>
+    </div>
+    <div class="card-divider"></div>
+    <div class="card-meta">
+      <span class="ship-pill free">🚚 택배비 무료</span>
+    </div>
+    <div class="unit-calc">개당 <strong>8,000원</strong> · 가장 저렴한 구성</div>
+    <div class="bonus-box">
+      <span class="bonus-icon">🎨</span>
+      퍼스널컬러 셀프 자가진단 동봉
+    </div>
+  </div>
+</section>
+
+<!-- 안내 -->
+<div class="info-section fade-up d5">
+  <div class="info-title">Notice</div>
+  <div class="info-row">
+    <div class="info-icon">📦</div>
+    <div class="info-text"><strong>1개 구매 시</strong> 택배비가 별도로 부과돼요.</div>
+  </div>
+  <div class="info-row">
+    <div class="info-icon">🚚</div>
+    <div class="info-text"><strong>3개·5개 구매 시</strong> 택배비 무료예요.</div>
+  </div>
+  <div class="info-row">
+    <div class="info-icon">🎨</div>
+    <div class="info-text"><strong>5개 세트</strong>에는 퍼스널컬러 셀프 자가진단이 함께 동봉돼요.</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section fade-up d6">
+  <a href="https://muuuni.com" class="cta-btn">
+    지금 구매하러 가기 →
+  </a>
+</div>
+
+<footer>MUUUNI × 토리에스엠알 · Mayne Cosmetic</footer>
+
+</body>
+</html>
