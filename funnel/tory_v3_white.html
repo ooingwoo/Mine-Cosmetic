@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUUUNI × 토리</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#faf8f5; --surface:#ffffff; --surface2:#f2ede6;
+  --border:#e8e3dc; --border2:#d0cac1;
+  --accent:#111111;
+  --text:#111111; --text-mid:#aaa; --text-dim:#e0dbd4;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+.inner{width:100%;max-width:640px;margin:0 auto;padding:0 clamp(20px,5vw,44px);}
+
+/* ── TOP BAR ── */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(250,248,245,.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.topbar-inner{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px clamp(20px,5vw,44px);
+  max-width:640px;margin:0 auto;
+}
+.topbar-brand{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,2.5vw,18px);letter-spacing:5px;color:var(--text-mid);}
+.topbar-collab{font-family:'Bebas Neue',sans-serif;font-size:clamp(12px,2vw,15px);letter-spacing:3px;color:var(--text);}
+.topbar-yt{display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--text-mid);font-size:clamp(10px,1.5vw,12px);letter-spacing:1px;transition:color .2s;}
+.topbar-yt:hover{color:#ff0000;}
+.yt-dot{width:7px;height:7px;border-radius:50%;background:#ff0000;}
+
+/* 상단 강조선 */
+.topbar::before{content:'';display:block;height:2px;background:var(--text);}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:0 0 clamp(44px,7vw,64px);
+  position:relative;
+  border-bottom:1px solid var(--border);
+  overflow:hidden;
+  background:var(--surface);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;user-select:none;
+}
+.hero-bg-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(120px,35vw,280px);
+  letter-spacing:-4px;color:var(--text-dim);
+  white-space:nowrap;line-height:1;
+}
+
+.hero-content{position:relative;z-index:1;}
+.hero-tag{
+  font-size:clamp(9px,1.5vw,11px);letter-spacing:4px;
+  color:var(--text-mid);margin-bottom:clamp(12px,2vw,18px);
+  display:flex;align-items:center;gap:8px;
+}
+.hero-tag::before{content:'';width:24px;height:1px;background:var(--text-mid);}
+.hero-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(56px,16vw,110px);
+  line-height:.92;letter-spacing:2px;
+  color:var(--text);margin-bottom:clamp(16px,3vw,24px);
+}
+.hero-name .hl{color:var(--text-mid);display:block;}
+.hero-desc{
+  font-size:clamp(12px,2vw,14px);color:var(--text-mid);
+  line-height:1.8;font-weight:300;
+  margin-bottom:clamp(28px,5vw,40px);
+}
+.hero-yt{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:12px;padding:12px 18px;
+  text-decoration:none;color:var(--text);
+  font-size:clamp(12px,1.8vw,14px);
+  transition:border-color .2s,background .2s;
+  width:100%;max-width:360px;
+  justify-content:space-between;
+}
+.hero-yt:hover{border-color:var(--border2);background:var(--surface2);}
+.hero-yt-left{display:flex;align-items:center;gap:10px;}
+.hero-yt-icon{width:32px;height:32px;border-radius:8px;background:#ff0000;display:flex;align-items:center;justify-content:center;font-size:12px;color:white;flex-shrink:0;}
+.hero-yt-label{font-size:9px;color:var(--text-mid);letter-spacing:1px;margin-bottom:1px;}
+.hero-yt-name{font-size:12px;font-weight:500;}
+.hero-yt-arrow{color:var(--text-mid);}
+
+/* 스크롤 인디케이터 */
+.scroll-ind{
+  position:absolute;right:clamp(20px,5vw,44px);bottom:clamp(44px,7vw,64px);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:8px;letter-spacing:3px;color:var(--text-mid);
+  writing-mode:vertical-rl;z-index:1;
+}
+.scroll-line{width:1px;height:36px;background:linear-gradient(180deg,var(--text),transparent);animation:pulse 2s ease infinite;}
+@keyframes pulse{0%,100%{opacity:.2}50%{opacity:.7}}
+
+/* ── 섹션 헤더 ── */
+.section-head{
+  padding:clamp(24px,4vw,36px) 0 clamp(16px,3vw,24px);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:flex-end;
+}
+.sec-label{font-size:clamp(8px,1.2vw,10px);letter-spacing:4px;color:var(--text-mid);}
+.sec-count{font-family:'Bebas Neue',sans-serif;font-size:clamp(12px,1.8vw,14px);color:var(--text-dim);}
+
+/* ── 상품 rows ── */
+.product-row{
+  border-bottom:1px solid var(--border);
+  padding:clamp(24px,4vw,36px) 0;
+  display:grid;
+  grid-template-columns:clamp(48px,12vw,80px) 1fr;
+  gap:clamp(16px,3vw,28px);
+  align-items:start;
+  transition:background .2s;
+  position:relative;
+}
+.product-row:hover{background:rgba(0,0,0,.015);}
+.product-row.best{background:rgba(0,0,0,.02);}
+.product-row.best::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--text);}
+
+.prod-index{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px,10vw,80px);
+  line-height:1;color:var(--text-dim);
+  padding-top:4px;
+}
+.prod-index.on{color:var(--text);}
+
+.prod-body{}
+.prod-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:clamp(12px,2vw,18px);}
+.prod-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,4.5vw,36px);letter-spacing:1px;color:var(--text);margin-bottom:2px;}
+.prod-sub{font-size:clamp(10px,1.4vw,12px);color:var(--text-mid);letter-spacing:1px;}
+.prod-price-wrap{text-align:right;}
+.prod-price{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5.5vw,46px);color:var(--text);line-height:1;}
+.prod-won{font-size:11px;color:var(--text-mid);margin-top:2px;}
+
+.prod-meta{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.prod-ship{display:inline-flex;align-items:center;gap:5px;font-size:clamp(11px,1.5vw,13px);padding:4px 12px;border-radius:8px;font-weight:500;}
+.prod-ship.paid{background:#fff2f0;color:#d63031;}
+.prod-ship.free{background:#f0faf2;color:#27ae60;}
+.prod-unit{font-size:clamp(10px,1.4vw,12px);color:var(--text-mid);}
+.prod-unit strong{color:var(--text);}
+
+.prod-bonus{
+  margin-top:clamp(10px,2vw,14px);
+  display:flex;align-items:center;gap:8px;
+  font-size:clamp(11px,1.5vw,13px);color:var(--text-mid);
+  padding:10px 14px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:10px;
+}
+
+/* ── NOTICE ── */
+.notice-section{padding:clamp(32px,5vw,48px) 0;}
+.notice-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(16px,2.5vw,20px);letter-spacing:4px;color:var(--text-mid);margin-bottom:clamp(16px,3vw,24px);}
+.notice-item{display:flex;gap:0;border-top:1px solid var(--border);}
+.notice-item:last-child{border-bottom:1px solid var(--border);}
+.notice-n{font-family:'Bebas Neue',sans-serif;font-size:10px;color:var(--text-dim);padding:clamp(14px,2.5vw,18px) clamp(12px,2vw,16px) clamp(14px,2.5vw,18px) 0;min-width:28px;flex-shrink:0;}
+.notice-t{font-size:clamp(12px,1.8vw,14px);color:var(--text-mid);padding:clamp(14px,2.5vw,18px) 0;line-height:1.6;flex:1;}
+.notice-t strong{color:var(--text);}
+
+/* ── CTA ── */
+.cta-section{padding:0 0 clamp(52px,8vw,80px);}
+.cta-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap;}
+.cta-copy{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,6vw,44px);letter-spacing:2px;line-height:1;color:var(--text);}
+.cta-copy span{color:var(--text-mid);display:block;}
+.cta-btn{
+  display:inline-block;
+  background:var(--text);color:white;
+  padding:clamp(14px,2vw,18px) clamp(22px,4vw,32px);
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(14px,2vw,17px);letter-spacing:3px;
+  text-decoration:none;border-radius:10px;
+  transition:opacity .2s,transform .2s;flex-shrink:0;
+}
+.cta-btn:hover{background:#333;transform:scale(.98);}
+
+footer{
+  padding:20px clamp(20px,5vw,44px);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;
+  font-size:clamp(9px,1.3vw,10px);color:var(--text-mid);letter-spacing:2px;
+  max-width:640px;margin:0 auto;
+}
+
+.fade-up{opacity:0;transform:translateY(20px);animation:fadeUp .7s ease forwards;}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}
+.d4{animation-delay:.4s}.d5{animation-delay:.5s}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-brand">MUUUNI</div>
+    <div class="topbar-collab">× 토리</div>
+    <a href="https://youtube.com/@torysmr" class="topbar-yt">
+      <div class="yt-dot"></div>@torysmr
+    </a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"><div class="hero-bg-text">토리</div></div>
+  <div class="inner">
+    <div class="hero-content fade-up">
+      <div class="hero-tag">MUUUNI 전용 구성</div>
+      <h1 class="hero-name">토리<span class="hl">× MUUUNI</span></h1>
+      <p class="hero-desc">토리 구독자만을 위한<br>특별 구성과 가격</p>
+      <a href="https://youtube.com/@torysmr" class="hero-yt">
+        <div class="hero-yt-left">
+          <div class="hero-yt-icon">▶</div>
+          <div><div class="hero-yt-label">유튜브</div><div class="hero-yt-name">@torysmr</div></div>
+        </div>
+        <div class="hero-yt-arrow">→</div>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-ind"><div class="scroll-line"></div>SCROLL</div>
+</section>
+
+<!-- 상품 -->
+<div class="inner">
+  <div class="section-head fade-up d1">
+    <div class="sec-label">MUUUNI 상품</div>
+    <div class="sec-count">03 ITEMS</div>
+  </div>
+
+  <div class="product-row fade-up d2">
+    <div class="prod-index">01</div>
+    <div class="prod-body">
+      <div class="prod-top">
+        <div><div class="prod-name">무니 1개</div><div class="prod-sub">단품 구매</div></div>
+        <div class="prod-price-wrap"><div class="prod-price">9,000</div><div class="prod-won">원</div></div>
+      </div>
+      <div class="prod-meta">
+        <div class="prod-ship paid">📦 택배비 별도</div>
+        <div class="prod-unit">개당 <strong>9,000원</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-row fade-up d3">
+    <div class="prod-index">02</div>
+    <div class="prod-body">
+      <div class="prod-top">
+        <div><div class="prod-name">무니 3개</div><div class="prod-sub">3개 묶음</div></div>
+        <div class="prod-price-wrap"><div class="prod-price">25,000</div><div class="prod-won">원</div></div>
+      </div>
+      <div class="prod-meta">
+        <div class="prod-ship free">🚚 택배비 무료</div>
+        <div class="prod-unit">개당 <strong>8,333원</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-row best fade-up d4">
+    <div class="prod-index on">03</div>
+    <div class="prod-body">
+      <div class="prod-top">
+        <div><div class="prod-name">무니 5개</div><div class="prod-sub">5개 세트 · BEST</div></div>
+        <div class="prod-price-wrap"><div class="prod-price">40,000</div><div class="prod-won">원</div></div>
+      </div>
+      <div class="prod-meta">
+        <div class="prod-ship free">🚚 택배비 무료</div>
+        <div class="prod-unit">개당 <strong>8,000원</strong> · 최저가</div>
+      </div>
+      <div class="prod-bonus">🎨 퍼스널컬러 셀프 자가진단 동봉</div>
+    </div>
+  </div>
+
+  <!-- NOTICE -->
+  <div class="notice-section fade-up d4">
+    <div class="notice-title">NOTICE</div>
+    <div class="notice-item"><div class="notice-n">01</div><div class="notice-t"><strong>1개 구매 시</strong> 택배비가 별도로 부과됩니다.</div></div>
+    <div class="notice-item"><div class="notice-n">02</div><div class="notice-t"><strong>3개·5개 구매 시</strong> 택배비가 무료입니다.</div></div>
+    <div class="notice-item"><div class="notice-n">03</div><div class="notice-t"><strong>5개 세트</strong>에는 퍼스널컬러 셀프 자가진단이 동봉됩니다.</div></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section fade-up d5">
+    <div class="cta-inner">
+      <div class="cta-copy">지금 바로<span>구매하기</span></div>
+      <a href="https://muuuni.com" class="cta-btn">GO →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>MUUUNI × 토리에스엠알</span>
+  <span>Mayne Cosmetic</span>
+</footer>
+
+</body>
+</html>
